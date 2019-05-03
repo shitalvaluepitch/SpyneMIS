@@ -1,0 +1,74 @@
+table,
+mat-table {
+  width: 100%;
+}
+
+.mat-row:nth-child(even) {
+  background-color: #f3f0f0;
+}
+
+.mat-row:nth-child(odd) {
+  background-color: white;
+}
+.mat-header-cell {
+  background-color: #aba7a7;
+}
+.mat-column-number {
+  flex: 0 0 60px;
+}
+.mat-column-name {
+  flex: 0 0 170px;
+}
+.mat-column-task {
+  flex: 0 0 400px;
+}
+
+.mat-column-completed {
+  flex: 0 0 150px;
+}
+.mat-column-days {
+  flex: 0 0 60px;
+}
+.mat-column-stars {
+  flex: 0 0 150px;
+}
+.mat-column-userrating {
+  flex: 0 0 150px;
+}
+.name-overdue {
+  flex: 0 0 170px;
+}
+
+.task-overdue {
+  flex: 0 0 550px;
+}
+
+.deadline-overdue {
+  flex: 0 0 100px;
+}
+
+.assigned-overdue {
+  flex: 0 0 170px;
+}
+.days-overdue {
+  flex: 0 0 80px;
+}
+
+.status-wip {
+  flex: 0 0 100px;
+}
+.days-wip {
+  flex: 0 0 80px;
+}
+.deadline-wip {
+  flex: 0 0 170px;
+}
+.task-wip {
+  flex: 0 0 550px;
+}
+.status-deny {
+  flex: 0 0 200px;
+}
+.task-deny {
+  flex: 0 0 500px;
+}

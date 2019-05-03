@@ -1,0 +1,10 @@
+.valuepitch-footer {
+  align-self: flex-end;
+  flex: none;
+  background-color: darkgray;
+  font-size: 14px;
+}
+.div-footer {
+  text-align: center;
+  flex: 1 1 auto;
+}

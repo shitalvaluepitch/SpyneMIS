@@ -1,0 +1,287 @@
+<div class="container">
+  <mat-tab-group>
+    <mat-tab label="Completed">
+      <div class="row">
+        <div class="col-md-12 col-lg-12 col-12">
+          <mat-table
+            [dataSource]="completedTaskData"
+            class="mat-elevation-z8 stripped table-bordered table-striped"
+            matSort
+          >
+            <ng-container matColumnDef="number">
+              <mat-header-cell *matHeaderCellDef>#</mat-header-cell>
+              <mat-cell *matCellDef="let row">{{ row.number }}</mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="name">
+              <mat-header-cell *matHeaderCellDef>Created</mat-header-cell>
+              <mat-cell *matCellDef="let row">{{
+                row.createdBy.name + " @" + row.createdBy.date
+              }}</mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="task">
+              <mat-header-cell *matHeaderCellDef>Task</mat-header-cell>
+              <mat-cell *matCellDef="let row">{{
+                row.taskDetails.name
+              }}</mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="deadline">
+              <mat-header-cell *matHeaderCellDef>Deadline</mat-header-cell>
+              <mat-cell *matCellDef="let row">{{ row.deadline }}</mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="completed">
+              <mat-header-cell *matHeaderCellDef>Completed</mat-header-cell>
+              <mat-cell *matCellDef="let row">
+                {{ row.assignedTo.name + " @" + row.completionDate }}
+              </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="days">
+              <mat-header-cell *matHeaderCellDef>Days</mat-header-cell>
+              <mat-cell *matCellDef="let row">
+                {{ row.days }}
+              </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="stars">
+              <mat-header-cell *matHeaderCellDef>Task Rating</mat-header-cell>
+              <mat-cell *matCellDef="let row">
+                {{ row.avgTaskRating }}
+              </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="userrating">
+              <mat-header-cell *matHeaderCellDef>User Rating</mat-header-cell>
+              <mat-cell *matCellDef="let row">
+                {{ row.avgUserRating }}
+              </mat-cell>
+            </ng-container>
+            <mat-header-row
+              *matHeaderRowDef="displayedColumns"
+            ></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+          </mat-table>
+          <mat-paginator
+            #paginator="matPaginator"
+            [pageSizeOptions]="[10, 20, 30, 100]"
+            [pageSize]="10"
+          ></mat-paginator>
+        </div>
+      </div>
+    </mat-tab>
+    <mat-tab label="Overdue">
+      <div class="row">
+        <div class="col-md-12 col-lg-12 col-12">
+          <mat-table
+            [dataSource]="overdueTaskData"
+            class="mat-elevation-z8 stripped table-bordered table-striped"
+            matSort
+          >
+            <ng-container matColumnDef="number">
+              <mat-header-cell *matHeaderCellDef>#</mat-header-cell>
+              <mat-cell *matCellDef="let row">{{ row.number }}</mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="name">
+              <mat-header-cell *matHeaderCellDef class="name-overdue"
+                >Created</mat-header-cell
+              >
+              <mat-cell *matCellDef="let row" class="name-overdue">{{
+                row.createdBy.name + " @" + row.createdBy.date
+              }}</mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="task" class="task-overdue">
+              <mat-header-cell *matHeaderCellDef class="task-overdue"
+                >Task</mat-header-cell
+              >
+              <mat-cell *matCellDef="let row" class="task-overdue">{{
+                row.taskDetails.name
+              }}</mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="assigned" class="assigned-overdue">
+              <mat-header-cell *matHeaderCellDef class="assigned-overdue"
+                >Assigned To</mat-header-cell
+              >
+              <mat-cell *matCellDef="let row" class="assigned-overdue">
+                {{ row.assignedTo.name + " @" + row.assignedTo.date }}
+              </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="deadline" class="deadline-overdue">
+              <mat-header-cell *matHeaderCellDef class="deadline-overdue"
+                >Deadline</mat-header-cell
+              >
+              <mat-cell *matCellDef="let row" class="deadline-overdue">{{
+                row.deadline
+              }}</mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="days" class="days-overdue">
+              <mat-header-cell *matHeaderCellDef class="days-overdue"
+                >Due Days</mat-header-cell
+              >
+              <mat-cell *matCellDef="let row" class="days-overdue">
+                {{ row.days }}
+              </mat-cell>
+            </ng-container>
+
+            <mat-header-row
+              *matHeaderRowDef="displayedColumnsOverdue"
+            ></mat-header-row>
+            <mat-row
+              *matRowDef="let row; columns: displayedColumnsOverdue"
+            ></mat-row>
+          </mat-table>
+          <mat-paginator
+            #paginatorDue="matPaginator"
+            [pageSizeOptions]="[10, 20, 30, 100]"
+            [pageSize]="10"
+          ></mat-paginator>
+        </div>
+      </div>
+    </mat-tab>
+
+    <mat-tab label="WIP">
+      <div class="row">
+        <div class="col-md-12 col-lg-12 col-12">
+          <mat-table
+            [dataSource]="wipTaskData"
+            class="mat-elevation-z8 stripped table-bordered table-striped"
+            matSort
+          >
+            <ng-container matColumnDef="number">
+              <mat-header-cell *matHeaderCellDef>#</mat-header-cell>
+              <mat-cell *matCellDef="let row">{{ row.number }}</mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="name">
+              <mat-header-cell *matHeaderCellDef>Created</mat-header-cell>
+              <mat-cell *matCellDef="let row">{{
+                row.createdBy.name + " @" + row.createdBy.date
+              }}</mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="task" class="task-wip">
+              <mat-header-cell *matHeaderCellDef class="task-wip"
+                >Task</mat-header-cell
+              >
+              <mat-cell *matCellDef="let row" class="task-wip">{{
+                row.taskDetails.name
+              }}</mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="created">
+              <mat-header-cell *matHeaderCellDef>Created</mat-header-cell>
+              <mat-cell *matCellDef="let row">
+                {{ row.createdBy.date }}
+              </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="deadline" class="deadline-wip">
+              <mat-header-cell *matHeaderCellDef class="deadline-wip"
+                >Deadline</mat-header-cell
+              >
+              <mat-cell *matCellDef="let row" class="deadline-wip">{{
+               row.assignedTo.name+" @"+ row.deadline
+              }}</mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="completed">
+              <mat-header-cell *matHeaderCellDef>Completed</mat-header-cell>
+              <mat-cell *matCellDef="let row">
+                {{ row.assignedTo.name + " @" + row.assignedTo.date }}
+              </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="days" class="days-wip">
+              <mat-header-cell *matHeaderCellDef class="days-wip"
+                >Days Left</mat-header-cell
+              >
+              <mat-cell *matCellDef="let row" class="days-wip">
+                {{ row.days }}
+              </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="status" class="status-wip">
+              <mat-header-cell *matHeaderCellDef class="status-wip"
+                >Status</mat-header-cell
+              >
+              <mat-cell *matCellDef="let row" class="status-wip">
+                {{ row.status }}
+              </mat-cell>
+            </ng-container>
+
+            <mat-header-row
+              *matHeaderRowDef="displayedColumnsWIP"
+            ></mat-header-row>
+            <mat-row
+              *matRowDef="let row; columns: displayedColumnsWIP"
+            ></mat-row>
+          </mat-table>
+          <mat-paginator
+            #paginatorWIP="matPaginator"
+            [pageSizeOptions]="[10, 20, 30, 100]"
+            [pageSize]="10"
+          ></mat-paginator>
+        </div>
+      </div>
+    </mat-tab>
+
+    <mat-tab label="Denied">
+      <div class="row">
+        <div class="col-md-12 col-lg-12 col-12">
+          <mat-table
+            [dataSource]="deniedTaskData"
+            class="mat-elevation-z8 stripped table-bordered table-striped"
+            matSort
+          >
+            <ng-container matColumnDef="number">
+              <mat-header-cell *matHeaderCellDef>#</mat-header-cell>
+              <mat-cell *matCellDef="let row">{{ row.number }}</mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="name" class="name-overdue">
+              <mat-header-cell *matHeaderCellDef class="name-overdue"
+                >Name</mat-header-cell
+              >
+              <mat-cell *matCellDef="let row" class="name-overdue">{{
+                row.createdBy.name + " @" + row.createdBy.date
+              }}</mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="task" class="task-deny">
+              <mat-header-cell *matHeaderCellDef class="task-deny"
+                >Task</mat-header-cell
+              >
+              <mat-cell *matCellDef="let row" class="task-deny">{{
+                row.taskDetails.name
+              }}</mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="denied">
+              <mat-header-cell *matHeaderCellDef>Denied</mat-header-cell>
+              <mat-cell *matCellDef="let row">
+                {{ row.assignedTo.name + " @" + row.denyDate }}
+              </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="reason" class="status-deny">
+              <mat-header-cell *matHeaderCellDef class="status-deny"
+                >Reason</mat-header-cell
+              >
+              <mat-cell *matCellDef="let row" class="status-deny">
+                {{ row.remark }}
+              </mat-cell>
+            </ng-container>
+
+            <mat-header-row
+              *matHeaderRowDef="displayedColumnsDeny"
+            ></mat-header-row>
+            <mat-row
+              *matRowDef="let row; columns: displayedColumnsDeny"
+            ></mat-row>
+          </mat-table>
+          <mat-paginator
+            #paginatorDeny="matPaginator"
+            [pageSizeOptions]="[10, 20, 30, 100]"
+            [pageSize]="10"
+          ></mat-paginator>
+        </div>
+      </div>
+    </mat-tab>
+  </mat-tab-group>
+</div>
